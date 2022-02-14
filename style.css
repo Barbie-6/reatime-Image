@@ -1,45 +1,10 @@
-  .heading
-  {
-    width: 100%;
-    margin: 0px;
-    box-shadow:5px 5px 5px grey;
+h3 {
+    font-size: 40px;
+    background-color: antiquewhite;
+    width: 80% !important;
+}
+#btn1 {
     font-size: 20px;
-  }
-  .heading_div
-  {
-    background: white ; 
-    border-radius: 20px; 
     color: black;
-    box-shadow:5px 5px 5px grey;
-    float: none;
-    padding: 5px;
-  }
-  .heading_div2
-  {
-    font-size: 18px ;
-  }
-  .result_para_tag
-  {
-    box-shadow:5px 5px 5px grey;
-    font-size: 18px;
-  }
-  .result_para_tag span {
-    white-space: pre-line;
-  }
-  .footer {
-    font-variant: small-caps;
-    background-color: grey;
-    color: white;
-    text-align: center;
-    line-height: 2;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-  }
-  canvas {
-    border: black solid 2px ridge;
-    box-shadow: 5px 6px 7px greenyellow;
-    margin-top: 160px;
-    border-radius: 20px;
-  }
- 
+    background-color: lightpink;
+}

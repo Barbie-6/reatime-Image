@@ -1,41 +1,35 @@
-function setup() {
-  canvas = createCanvas(250, 250);
-  canvas.center();
-  video = createCapture(VIDEO);
-  video.hide();
+lower_nose_x = 0;
+lower_nose_y = 0;
 
-  classifier = ml5.imageClassifier('MobileNet', modelLoaded);
+function preload() {
+    moustache = loadImage("https://i.postimg.cc/Jn2fZ4DF/moustache-removebg-preview.png");
 }
-function modelLoaded() {
-  console.log("Model Is Loaded!!!");
+function setup() {
+    canvas = createCanvas(300, 300);
+    canvas.center();
+    canvas.background("white");
+    video = createCapture(VIDEO)
+    video.size(300, 300);
+    video.hide();
+    poseNet = ml5.poseNet(video, modelLoaded);
+    poseNet.on('pose', gotPoses);
 }
 function draw() {
-  image(video, 0, 0, 250, 250);
-  classifier.classify(video, gotResults);
+    image(video, 0, 0, 300, 300);
+
+    image(moustache, lower_nose_x - 15, lower_nose_y + 10, 30, 30);
 
 }
-
-previous_result = '';
-
-function gotResults(error, results) {
-  if (error) {
-    console.error(error);
-  }
-  else {
-    if ((results[0].confidence > 0.5) && (previous_result != results[0].label)) {
-      console.log(results);
-      previous_result = results[0].label;
-      synth = window.speechSynthesis;
-      speak_data = "object detected is  " + results[0].label;
-      utter_this = new SpeechSynthesisUtterance(speak_data);
-      synth.speak(utter_this);
-
-
-      document.getElementById("result_object_name").innerHTML = results[0].label;
-      document.getElementById("result_object_accuracy").innerHTML = results[0].confidence.toFixed(3);
+function modelLoaded() {
+    console.log("mdel is initialized");
+}
+function gotPoses(results) {
+    if (results.length > 0)
+    {
+        console.log(results)
+        lower_nose_x = results[0].pose.nose.x;
+        lower_nose_y = results[0].pose.nose.y;
+        console.log("nose_x = " + lower_nose_x);
+        console.log("nose_y = " + lower_nose_y);
     }
-  }
 }
-
-
-
